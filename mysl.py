@@ -26,6 +26,7 @@ x = data['date'].str.split('/',expand=True)
 data['timestart'] = x[2] + '/' + x[1] + '/' + x[0] + ' ' + data['time']
 data['timestart'] = pd.to_datetime(data['timestart'])
 
+
 # CREATING FUNCTION FOR MAPS
 
 def map(data, lat, lon, zoom):
@@ -41,7 +42,7 @@ def map(data, lat, lon, zoom):
             pdk.Layer(
                 "HexagonLayer",
                 data=data,
-                get_position=["lon", "lat"],
+                get_position=["lonstartl", "latstartl"],
                 radius=100,
                 elevation_scale=4,
                 elevation_range=[0, 1000],
@@ -69,6 +70,7 @@ with row1_2:
 
 # FILTERING DATA BY DATE AND HOUR SELECTED
 data = data[(data['timestart'].dt.day == day_selected) & (data['timestart'].dt.hour == hour_selected)]
+d = mydata[['lonstartl','latstartl']]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
 row2_1, row2_2, row2_3, row2_4 = st.beta_columns((2,1,1,1))
@@ -82,19 +84,19 @@ midpoint = (np.average(data['latstartl']), np.average(data['lonstartl']))
 
 with row2_1:
     st.write("**All Bangkok from %i:00 and %i:00**" % (hour_selected, (hour_selected + 1) % 24))
-    map(data, midpoint[0], midpoint[1], 11)
+    map(d, midpoint[0], midpoint[1], 11)
 
 with row2_2:
     st.write("**DONMUENG AIRPORT**")
-    map(data, DONMUENGAIRPORT[0],DONMUENGAIRPORT[1], zoom_level)
+    map(d, DONMUENGAIRPORT[0],DONMUENGAIRPORT[1], zoom_level)
 
 with row2_3:
     st.write("**BTS SIAM**")
-    map(data, BTSSIAM[0],BTSSIAM[1], zoom_level)
+    map(d, BTSSIAM[0],BTSSIAM[1], zoom_level)
 
 with row2_4:
     st.write("**MOCHIT BUS TERMINAL**")
-    map(data, MOCHITBUSTERMINAL[0],MOCHITBUSTERMINAL[1], zoom_level)
+    map(d, MOCHITBUSTERMINAL[0],MOCHITBUSTERMINAL[1], zoom_level)
 
 # FILTERING DATA FOR THE HISTOGRAM
 filtered = data[
