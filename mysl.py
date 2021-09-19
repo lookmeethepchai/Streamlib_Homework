@@ -56,14 +56,15 @@ def map(data, lat, lon, zoom):
 row1_1, row1_2 = st.columns((2,3))
 
 with row1_1:
-    st.title("Bangkok Uber Ridesharing Data : Thepchai Srinoi")
-    day_selected = st.slider("Select date of pickup", 1, 5)
-    hour_selected = st.slider("Select date of pickup", 0, 23)
+    st.title("Origin of travelling in Bangkok : UBER data : Thepchai Srinoi")
+    day_selected = st.slider("Select date (January 2019) of pickup", 1, 5)
+    hour_selected = st.slider("Select hour of pickup", 0, 23)
 
 with row1_2:
     st.write(
     """
     ##
+    Thepchai Srinoi 6130809121
     Examining how Uber pickups vary over time in Bangkok and at its major landmark.
     By sliding the slider on the left you can view different slices of time and explore different transportation trends.
     """)
