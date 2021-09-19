@@ -53,7 +53,7 @@ def map(data, lat, lon, zoom):
     ))
 
 # LAYING OUT THE TOP SECTION OF THE APP
-row1_1, row1_2 = st.beta_columns((2,3))
+row1_1, row1_2 = st.columns((2,3))
 
 with row1_1:
     st.title("Bangkok Uber Ridesharing Data : Thepchai Srinoi")
@@ -73,7 +73,7 @@ data = data[(data['timestart'].dt.day == day_selected) & (data['timestart'].dt.h
 d = data[['lonstartl','latstartl']]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
-row2_1, row2_2, row2_3, row2_4 = st.beta_columns((2,1,1,1))
+row2_1, row2_2, row2_3, row2_4 = st.columns((2,1,1,1))
 
 # SETTING THE ZOOM LOCATIONS FOR THE LANDMARK
 DONMUENGAIRPORT = [13.913312260542407, 100.60413432443109]
