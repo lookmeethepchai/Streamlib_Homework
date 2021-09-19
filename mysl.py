@@ -16,7 +16,7 @@ data2 = pd.read_csv('https://raw.githubusercontent.com/Maplub/odsample/master/20
 data3 = pd.read_csv('https://raw.githubusercontent.com/Maplub/odsample/master/20190103.csv')
 data4 = pd.read_csv('https://raw.githubusercontent.com/Maplub/odsample/master/20190104.csv')
 data5 = pd.read_csv('https://raw.githubusercontent.com/Maplub/odsample/master/20190105.csv')
-@st.cache(persist=True)
+# @st.cache(persist=True)
 
 # PREPARED FOR VISUALIZATION
 data = (((data1.append(data2)).append(data3)).append(data4)).append(data5)
