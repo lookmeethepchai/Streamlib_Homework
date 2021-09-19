@@ -70,7 +70,7 @@ with row1_2:
 
 # FILTERING DATA BY DATE AND HOUR SELECTED
 data = data[(data['timestart'].dt.day == day_selected) & (data['timestart'].dt.hour == hour_selected)]
-d = mydata[['lonstartl','latstartl']]
+d = data[['lonstartl','latstartl']]
 
 # LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS
 row2_1, row2_2, row2_3, row2_4 = st.beta_columns((2,1,1,1))
