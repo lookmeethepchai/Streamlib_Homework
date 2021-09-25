@@ -121,7 +121,7 @@ DONMUENGAIRPORT = [13.913312260542407, 100.60413432443109]
 BTSSIAM  = [13.745893093999975, 100.53414718395867]
 MOCHITBUSTERMINAL = [13.811274719071283, 100.5479664569791]
 zoom_level = 12
-midpoint = (np.average(data['latstop']), np.average(data['latstop']))
+midpoint = (np.average(data['latstop']), np.average(data['lonstop']))
 
 with row3_1:
     st.write("**All Bangkok from %i:00 and %i:00 : DESTINATION OF THE TRAVELLING**" % (hour_selected, (hour_selected + 1) % 24))
