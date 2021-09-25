@@ -75,7 +75,7 @@ with row1_2:
     ##
     Examining how Uber pickups vary over time in Bangkok and at its major landmark.
     By sliding the slider on the left you can view different slices of time and explore different transportation trends.
-    Presented by Thepchai Srinoi 6130809121.
+    Presented by Thepchai Srinoi.
     """)
 
 ########################################################################################### LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS : ORIGIN
