@@ -164,4 +164,29 @@ st.altair_chart(alt.Chart(chart_data)
         color='red'
     ), use_container_width=True)
 
+########################################################################################### LAYING OUT THE HISTOGRAM SECTION
+# FILTERING DATA FOR THE HISTOGRAM
+filtered = data[
+    (data['timestop'].dt.hour >= hour_selected) & (data['timestop'].dt.hour < (hour_selected + 1))
+    ]
+
+hist = np.histogram(filtered['timestop'].dt.minute, bins=60, range=(0, 60))[0]
+
+chart_data = pd.DataFrame({"minute": range(60), "pickups": hist})
+st.write("")
+
+st.write("**Breakdown of rides per minute between %i:00 and %i:00 : DESTINATION OF TRAVELLING ONLY**" % (hour_selected, (hour_selected + 1) % 24))
+
+st.altair_chart(alt.Chart(chart_data)
+    .mark_area(
+        interpolate='step-after',
+    ).encode(
+        x=alt.X("minute:Q", scale=alt.Scale(nice=False)),
+        y=alt.Y("pickups:Q"),
+        tooltip=['minute', 'pickups']
+    ).configure_mark(
+        opacity=0.5,
+        color='red'
+    ), use_container_width=True)
+
 ########################################################################################### END
