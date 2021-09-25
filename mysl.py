@@ -30,8 +30,8 @@ y = data['datestop'].str.split('/',expand=True)
 data['timestop'] = y[2] + '/' + y[1] + '/' + y[0] + ' ' + data['timestopp']
 data['timestop'] = pd.to_datetime(data['timestop'])
 
-data = data[['latstartl','lonstartl','timestart']]
-data = data.reset_index(drop=True) 
+#data = data[['latstartl','lonstartl','timestart']]
+#data = data.reset_index(drop=True) 
 
 #data_des =  data[['latstop','lonstop','timestop']]
 #data_des = data_des.reset_index(drop=True)
