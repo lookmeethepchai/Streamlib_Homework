@@ -94,7 +94,7 @@ midpoint = (np.average(data['latstartl']), np.average(data['lonstartl']))
 
 with row2_1:
     st.write("**All Bangkok from %i:00 and %i:00 : ORIGIN OF THE TRAVELLING**" % (hour_selected, (hour_selected + 1) % 24))
-    map(d, midpoint[0], midpoint[1], 11, 'lonstartl', 'latstartl')
+    map(d, midpoint[0], midpoint[1], 10, 'lonstartl', 'latstartl')
 
 with row2_2:
     st.write("**DONMUENG AIRPORT**")
@@ -125,7 +125,7 @@ midpoint = (np.average(data['latstop']), np.average(data['lonstop']))
 
 with row3_1:
     st.write("**All Bangkok from %i:00 and %i:00 : DESTINATION OF THE TRAVELLING**" % (hour_selected, (hour_selected + 1) % 24))
-    map(d, midpoint[0], midpoint[1], 11, 'lonstop', 'latstop')
+    map(d, midpoint[0], midpoint[1], 10, 'lonstop', 'latstop')
 
 with row3_2:
     st.write("**DONMUENG AIRPORT**")
