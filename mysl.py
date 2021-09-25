@@ -30,12 +30,6 @@ y = data['datestop'].str.split('/',expand=True)
 data['timestop'] = y[2] + '/' + y[1] + '/' + y[0] + ' ' + data['timestopp']
 data['timestop'] = pd.to_datetime(data['timestop'])
 
-#data = data[['latstartl','lonstartl','timestart']]
-#data = data.reset_index(drop=True) 
-
-#data_des =  data[['latstop','lonstop','timestop']]
-#data_des = data_des.reset_index(drop=True)
-
 # CREATING FUNCTION FOR MAPS
 
 def map(data, lat, lon, zoom, lonname, latname):
@@ -78,39 +72,8 @@ with row1_2:
     Presented by Thepchai Srinoi.
     """)
 
-########################################################################################### LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS : ORIGIN
-row2_1, row2_2, row2_3, row2_4 = st.columns((2,1,1,1))
-
-# FILTERING DATA BY DATE AND HOUR SELECTED
-data_ori = data[(data['timestart'].dt.day == day_selected) & (data['timestart'].dt.hour == hour_selected)]
-d = data_ori[['lonstartl','latstartl']]
-
-# SETTING THE ZOOM LOCATIONS FOR THE LANDMARK
-DONMUENGAIRPORT = [13.913312260542407, 100.60413432443109]
-BTSSIAM  = [13.745893093999975, 100.53414718395867]
-MOCHITBUSTERMINAL = [13.811274719071283, 100.5479664569791]
-zoom_level = 12
-midpoint = (np.average(data['latstartl']), np.average(data['lonstartl']))
-
-with row2_1:
-    st.write("**All Bangkok from %i:00 and %i:00 : ORIGIN OF THE TRAVELLING**" % (hour_selected, (hour_selected + 1) % 24))
-    map(d, midpoint[0], midpoint[1], 10, 'lonstartl', 'latstartl')
-
-with row2_2:
-    st.write("**DONMUENG AIRPORT**")
-    map(d, DONMUENGAIRPORT[0],DONMUENGAIRPORT[1], zoom_level, 'lonstartl', 'latstartl')
-
-with row2_3:
-    st.write("**BTS SIAM**")
-    map(d, BTSSIAM[0],BTSSIAM[1], zoom_level, 'lonstartl', 'latstartl')
-
-with row2_4:
-    st.write("**MOCHIT BUS TERMINAL**")
-    map(d, MOCHITBUSTERMINAL[0],MOCHITBUSTERMINAL[1], zoom_level, 'lonstartl', 'latstartl')
-
-
 ########################################################################################### LAYING OUT THE MIDDLE SECTION OF THE APP WITH THE MAPS : DESTINATION
-row3_1, row3_2, row3_3, row3_4 = st.columns((2,1,1,1))
+row2_1, row2_2, row2_3, row2_4 = st.columns((2,1,1,1))
 
 # FILTERING DATA BY DATE AND HOUR SELECTED
 data_des = data[(data['timestop'].dt.day == day_selected) & (data['timestop'].dt.hour == hour_selected)]
@@ -123,46 +86,21 @@ MOCHITBUSTERMINAL = [13.811274719071283, 100.5479664569791]
 zoom_level = 12
 midpoint = (np.average(data['latstop']), np.average(data['lonstop']))
 
-with row3_1:
+with row2_1:
     st.write("**All Bangkok from %i:00 and %i:00 : DESTINATION OF THE TRAVELLING**" % (hour_selected, (hour_selected + 1) % 24))
     map(d, midpoint[0], midpoint[1], 10, 'lonstop', 'latstop')
 
-with row3_2:
+with row2_2:
     st.write("**DONMUENG AIRPORT**")
     map(d, DONMUENGAIRPORT[0],DONMUENGAIRPORT[1], zoom_level, 'lonstop', 'latstop')
 
-with row3_3:
+with row2_3:
     st.write("**BTS SIAM**")
     map(d, BTSSIAM[0],BTSSIAM[1], zoom_level, 'lonstop', 'latstop')
 
-with row3_4:
+with row2_4:
     st.write("**MOCHIT BUS TERMINAL**")
     map(d, MOCHITBUSTERMINAL[0],MOCHITBUSTERMINAL[1], zoom_level, 'lonstop', 'latstop')
-
-########################################################################################### LAYING OUT THE HISTOGRAM SECTION
-# FILTERING DATA FOR THE HISTOGRAM
-filtered = data[
-    (data['timestart'].dt.hour >= hour_selected) & (data['timestart'].dt.hour < (hour_selected + 1))
-    ]
-
-hist = np.histogram(filtered['timestart'].dt.minute, bins=60, range=(0, 60))[0]
-
-chart_data = pd.DataFrame({"minute": range(60), "pickups": hist})
-st.write("")
-
-st.write("**Breakdown of rides per minute between %i:00 and %i:00 : ORIGIN OF TRAVELLING ONLY**" % (hour_selected, (hour_selected + 1) % 24))
-
-st.altair_chart(alt.Chart(chart_data)
-    .mark_area(
-        interpolate='step-after',
-    ).encode(
-        x=alt.X("minute:Q", scale=alt.Scale(nice=False)),
-        y=alt.Y("pickups:Q"),
-        tooltip=['minute', 'pickups']
-    ).configure_mark(
-        opacity=0.5,
-        color='red'
-    ), use_container_width=True)
 
 ########################################################################################### LAYING OUT THE HISTOGRAM SECTION
 # FILTERING DATA FOR THE HISTOGRAM
